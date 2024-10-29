@@ -8,17 +8,17 @@ public class Main {
     public static void main(String[] args) {
         try {
             PersonDAO persondao = new PersonDAO();
-            List<Person> persons = persondao.getAll();
-            System.out.println("persons:");
-            for (Person person : persons) {
-                System.out.println(person.getName());
+            List<Person> people = persondao.getAll();
+            System.out.println("people:");
+            for (Person person : people) {
+                System.out.println(String.valueOf(person.getId()).concat("-").concat(person.getName()));
             }
 
             CityDAO citydao = new CityDAO();
-            List<City> citys = citydao.getAll();
-            System.out.println("city:");
-            for (City city : citys) {
-                System.out.println(city.getName());
+            List<City> cities = citydao.getAll();
+            System.out.println("cities:");
+            for (City city : cities) {
+                System.out.println(String.valueOf(city.getId()).concat("-").concat(city.getName()));
             }
         } catch (Exception e) {
             e.printStackTrace();

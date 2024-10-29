@@ -26,13 +26,22 @@ public class EntityManager<T> {
             while ((line = br.readLine()) != null) {
                 String[] values = line.split(",");
                 T entity = entityType.getDeclaredConstructor().newInstance();
+                
+                if (values.length < headers.length) {
+                    continue;
+                }
 
                 for (int i = 0; i < headers.length; i++) {
                     Field field = entityType.getDeclaredField(headers[i].trim());
                     field.setAccessible(true);
 
                     if (field.getType() == int.class) {
-                        field.setInt(entity, Integer.parseInt(values[i].trim()));
+                        String value = values[i].trim();
+                        if (!value.isEmpty()) {
+                            field.setInt(entity, Integer.parseInt(values[i].trim()));
+                        } else {
+                            field.setInt(entity, 0);
+                        }
                     } else if (field.getType() == String.class) {
                         field.set(entity, values[i].trim());
                     }
